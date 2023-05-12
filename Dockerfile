@@ -24,3 +24,14 @@ RUN cd /usr/local/multiplexprocessor/multiplexprocessor-master && \
     sed -i '/gui/d' Makefile && \
     mvn install:install-file -Dfile=./gui/CSV2FCS/jar/csv2fcs.jar -DgroupId=net.sf.flowcyt -DartifactId=csv2fcs -Dversion=0.0.0 -Dpackaging=jar && \
     make
+RUN mkdir -p /usr/local/fftw && \
+    cd /usr/local/fftw && \
+    wget --quiet https://www.fftw.org/fftw-3.3.10.tar.gz && \
+    tar xzvf fftw-3.3.10.tar.gz && \
+    cd fftw-3.3.10 && \
+    ./configure --enable-shared && \
+    make && \
+    make install && \
+    ./configure --enable-float --enable-shared && \
+    make && \
+    make install
